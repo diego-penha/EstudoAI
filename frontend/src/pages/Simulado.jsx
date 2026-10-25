@@ -9,6 +9,13 @@ export default function Simulado() {
   const questoes =
     obterQuestoes();
 
+  const [indice, setIndice] =
+    useState(0);
+
+  const [respostaSelecionada,
+    setRespostaSelecionada] =
+    useState("");
+
   if (
     questoes.length === 0
   ) {
@@ -34,11 +41,26 @@ export default function Simulado() {
   }
 
   const questao =
-    questoes[0];
+    questoes[indice];
 
-    const [respostaSelecionada,
-       setRespostaSelecionada] =
-       useState("");
+  function proximaQuestao() {
+
+    if (
+      indice <
+      questoes.length - 1
+    ) {
+
+      setIndice(
+        indice + 1
+      );
+
+      setRespostaSelecionada(
+        ""
+      );
+
+    }
+
+  }
 
   return (
     <div className="page">
@@ -48,7 +70,9 @@ export default function Simulado() {
         <div className="card">
 
           <h2>
-            Questão 1 de {questoes.length}
+            Questão {indice + 1}
+            {" de "}
+            {questoes.length}
           </h2>
 
           <p>
@@ -59,58 +83,68 @@ export default function Simulado() {
 
           {
             questao.alternativas.map(
-              (
-                alternativa
-              ) => (
+              (alternativa) => (
 
                 <div
-  key={
-    alternativa.codigo
-  }
->
+                  key={
+                    alternativa.codigo
+                  }
+                  style={{
+                    marginBottom:
+                      "12px"
+                  }}
+                >
 
-  <label>
+                  <label>
 
-    <input
-      type="radio"
-      name="resposta"
-      value={
-        alternativa.codigo
-      }
+                    <input
+                      type="radio"
+                      name="resposta"
 
-      checked={
-        respostaSelecionada ===
-        alternativa.codigo
-      }
+                      value={
+                        alternativa.codigo
+                      }
 
-      onChange={() =>
-        setRespostaSelecionada(
-          alternativa.codigo
-        )
-      }
-    />
+                      checked={
+                        respostaSelecionada ===
+                        alternativa.codigo
+                      }
 
-    {" "}
+                      onChange={() =>
+                        setRespostaSelecionada(
+                          alternativa.codigo
+                        )
+                      }
+                    />
 
-    <strong>
-      {
-        alternativa.codigo
-      }
-    </strong>
+                    {" "}
 
-    {" - "}
+                    <strong>
+                      {alternativa.codigo}
+                    </strong>
 
-    {
-      alternativa.texto
-    }
+                    {" - "}
 
-  </label>
+                    {alternativa.texto}
 
-</div>
+                  </label>
+
+                </div>
 
               )
             )
           }
+
+          <br />
+
+          <button
+            className="btn"
+            onClick={
+              proximaQuestao
+            }
+          >
+            Próxima
+          </button>
 
         </div>
 
@@ -118,5 +152,4 @@ export default function Simulado() {
 
     </div>
   );
-
 }
