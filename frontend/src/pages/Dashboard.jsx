@@ -1,10 +1,47 @@
-import { useNavigate }
-from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import api from "../services/api";
+
+import {
+  salvarQuestoes
+} from "../services/simuladoStore";
+
 
 export default function Dashboard() {
 
   const navigate =
     useNavigate();
+
+    async function iniciarSimulado() {
+
+  try {
+
+    const resposta =
+      await api.get(
+        "/simulado/10"
+      );
+
+    salvarQuestoes(
+      resposta.data
+    );
+
+    navigate(
+      "/simulado"
+    );
+
+  } catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    alert(
+      "Erro ao carregar questões"
+    );
+
+  }
+
+}
 
   return (
     <div className="page">
@@ -32,13 +69,13 @@ export default function Dashboard() {
           <div className="button-group">
 
             <button
-              className="btn"
-              onClick={() =>
-                navigate("/simulado")
-              }
-            >
-              Iniciar Simulado
-            </button>
+  className="btn"
+  onClick={
+    iniciarSimulado
+  }
+>
+  Iniciar Simulado
+</button>
 
           </div>
 

@@ -1,4 +1,38 @@
+import {
+  obterQuestoes
+} from "../services/simuladoStore";
+
 export default function Simulado() {
+
+  const questoes =
+    obterQuestoes();
+
+  if (
+    questoes.length === 0
+  ) {
+
+    return (
+      <div className="page">
+
+        <div className="container">
+
+          <div className="card">
+
+            <h1>
+              Nenhum simulado carregado
+            </h1>
+
+          </div>
+
+        </div>
+
+      </div>
+    );
+
+  }
+
+  const questao =
+    questoes[0];
 
   return (
     <div className="page">
@@ -7,9 +41,45 @@ export default function Simulado() {
 
         <div className="card">
 
-          <h1>
-            Simulado
-          </h1>
+          <h2>
+            Questão 1 de {questoes.length}
+          </h2>
+
+          <p>
+            {questao.enunciado}
+          </p>
+
+          <hr />
+
+          {
+            questao.alternativas.map(
+              (
+                alternativa
+              ) => (
+
+                <div
+                  key={
+                    alternativa.codigo
+                  }
+                >
+
+                  <strong>
+                    {
+                      alternativa.codigo
+                    }
+                  </strong>
+
+                  {" - "}
+
+                  {
+                    alternativa.texto
+                  }
+
+                </div>
+
+              )
+            )
+          }
 
         </div>
 
