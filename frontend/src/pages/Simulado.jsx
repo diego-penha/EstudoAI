@@ -51,7 +51,7 @@ export default function Simulado() {
     ) {
 
       setIndice(
-        indice + 1
+       (atual) => atual + 1
       );
 
       setRespostaSelecionada(
@@ -70,15 +70,16 @@ export default function Simulado() {
         <div className="card">
 
           <h2>
-            Questão {indice + 1}
-            {" de "}
-            {questoes.length}
+             Questão {indice + 1}
+             de
+             {questoes.length}
           </h2>
 
           <p>
             {questao.enunciado}
           </p>
 
+          
           <hr />
 
           {
@@ -87,8 +88,9 @@ export default function Simulado() {
 
                 <div
                   key={
-                    alternativa.codigo
-                  }
+  `${questao.id}-${alternativa.codigo}`
+}
+
                   style={{
                     marginBottom:
                       "12px"
@@ -125,7 +127,11 @@ export default function Simulado() {
 
                     {" - "}
 
-                    {alternativa.texto}
+                   {
+  alternativa.texto
+    .replace(/^[A-D]\./, "")
+    .replace(/\t/g, " ")
+}
 
                   </label>
 
