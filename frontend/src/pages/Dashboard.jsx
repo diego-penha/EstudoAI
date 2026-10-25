@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import api from "../services/api";
+import { useState } from "react";
 
 import {
   salvarQuestoes
@@ -12,14 +13,18 @@ export default function Dashboard() {
   const navigate =
     useNavigate();
 
+    const [quantidade,
+      setQuantidade] =
+      useState(10);
+
     async function iniciarSimulado() {
 
   try {
 
     const resposta =
       await api.get(
-        "/simulado/10"
-      );
+         `/simulado/${quantidade}`
+  );
 
     salvarQuestoes(
       resposta.data
