@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   obterQuestoes
 } from "../services/simuladoStore";
@@ -34,6 +36,10 @@ export default function Simulado() {
   const questao =
     questoes[0];
 
+    const [respostaSelecionada,
+       setRespostaSelecionada] =
+       useState("");
+
   return (
     <div className="page">
 
@@ -58,24 +64,49 @@ export default function Simulado() {
               ) => (
 
                 <div
-                  key={
-                    alternativa.codigo
-                  }
-                >
+  key={
+    alternativa.codigo
+  }
+>
 
-                  <strong>
-                    {
-                      alternativa.codigo
-                    }
-                  </strong>
+  <label>
 
-                  {" - "}
+    <input
+      type="radio"
+      name="resposta"
+      value={
+        alternativa.codigo
+      }
 
-                  {
-                    alternativa.texto
-                  }
+      checked={
+        respostaSelecionada ===
+        alternativa.codigo
+      }
 
-                </div>
+      onChange={() =>
+        setRespostaSelecionada(
+          alternativa.codigo
+        )
+      }
+    />
+
+    {" "}
+
+    <strong>
+      {
+        alternativa.codigo
+      }
+    </strong>
+
+    {" - "}
+
+    {
+      alternativa.texto
+    }
+
+  </label>
+
+</div>
 
               )
             )
