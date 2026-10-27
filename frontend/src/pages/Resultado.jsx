@@ -23,24 +23,28 @@ export default function Resultado() {
             Resultado
           </h1>
 
-          <p>
-            Questões respondidas:
-            {" "}
-            {
-              resultado.respondidas || 0
-            }
-          </p>
+<h3>
+  ✅ Acertos: {resultado.acertos ?? 0}
+</h3>
 
-          <br />
+<h3>
+  ❌ Erros: {resultado.erros ?? 0}
+</h3>
 
-          <button
-            className="btn"
-            onClick={() =>
-              navigate("/")
-            }
-          >
-            🔄 Novo Simulado
-          </button>
+<h3>
+  🎯 Nota: {resultado.nota ?? 0}%
+</h3>
+
+<br />
+
+<button
+  className="btn"
+  onClick={() =>
+    navigate("/")
+  }
+>
+  🔄 Novo Simulado
+</button>
 
         </div>
 
@@ -48,5 +52,4 @@ export default function Resultado() {
 
     </div>
   );
-
 }

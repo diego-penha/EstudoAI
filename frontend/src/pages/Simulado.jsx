@@ -9,6 +9,8 @@ import {
   salvarResultado
 } from "../services/resultadoStore";
 
+import api from "../services/api";
+
 
 export default function Simulado() {
 
@@ -52,7 +54,7 @@ export default function Simulado() {
   const questao =
     questoes[indice];
 
-  function proximaQuestao() {
+  async function proximaQuestao() {
 
   if (
     indice <
@@ -65,26 +67,40 @@ export default function Simulado() {
 
   } else {
 
-  console.log(
-    "RESPOSTAS:",
-    respostas
-  );
-
-  console.log(
-    "QUANTIDADE:",
-    Object.keys(
+  const respostasFormatadas =
+    Object.entries(
       respostas
-    ).length
+    ).map(
+      ([questao_id, resposta]) => ({
+
+        questao_id:
+          Number(
+            questao_id
+          ),
+
+        resposta
+
+      })
+    );
+
+  console.log(
+    respostasFormatadas
   );
 
-  salvarResultado({
+  const resultado =
+    await api.post(
+      "/corrigir",
+      respostasFormatadas
+    );
 
-    respondidas:
-      Object.keys(
-        respostas
-      ).length
+    console.log(
+  "RESULTADO:",
+  resultado.data
+);
 
-  });
+  salvarResultado(
+    resultado.data
+  );
 
   navigate(
     "/resultado"
