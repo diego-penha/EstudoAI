@@ -12,9 +12,9 @@ export default function Simulado() {
   const [indice, setIndice] =
     useState(0);
 
-  const [respostaSelecionada,
-    setRespostaSelecionada] =
-    useState("");
+  const [respostas,
+   setRespostas] =
+    useState({});
 
   if (
     questoes.length === 0
@@ -45,22 +45,24 @@ export default function Simulado() {
 
   function proximaQuestao() {
 
-    if (
-      indice <
-      questoes.length - 1
-    ) {
+  if (
+    indice <
+    questoes.length - 1
+  ) {
 
-      setIndice(
-       (atual) => atual + 1
-      );
+    setIndice(
+      (atual) => atual + 1
+    );
 
-      setRespostaSelecionada(
-        ""
-      );
+  } else {
 
-    }
+    alert(
+      "Simulado finalizado!"
+    );
 
   }
+
+}
 
   return (
     <div className="page">
@@ -108,15 +110,23 @@ export default function Simulado() {
                       }
 
                       checked={
-                        respostaSelecionada ===
-                        alternativa.codigo
-                      }
+  respostas[
+    questao.id
+  ] ===
+  alternativa.codigo
+}
+
 
                       onChange={() =>
-                        setRespostaSelecionada(
-                          alternativa.codigo
-                        )
-                      }
+  setRespostas({
+
+    ...respostas,
+
+    [questao.id]:
+      alternativa.codigo
+
+  })
+}
                     />
 
                     {" "}
@@ -144,13 +154,21 @@ export default function Simulado() {
           <br />
 
           <button
-            className="btn"
-            onClick={
-              proximaQuestao
-            }
-          >
-            Próxima
-          </button>
+  className="btn"
+  onClick={
+    proximaQuestao
+  }
+>
+  {
+    indice <
+    questoes.length - 1
+
+      ? "Próxima"
+
+      : "Finalizar Simulado"
+  }
+</button>
+
 
         </div>
 

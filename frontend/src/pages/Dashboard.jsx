@@ -23,8 +23,8 @@ export default function Dashboard() {
 
     const resposta =
       await api.get(
-         `/simulado/${quantidade}`
-  );
+      `/simulado/${quantidade}`
+      );
 
     salvarQuestoes(
       resposta.data
@@ -70,6 +70,81 @@ export default function Dashboard() {
           <p>
             Banco com mais de 1000 questões
           </p>
+
+          <p>
+  Quantidade de questões
+</p>
+
+<div
+  style={{
+    marginTop: "15px",
+    marginBottom: "20px"
+  }}
+>
+
+  <label>
+    <input
+      type="radio"
+      checked={
+        quantidade === 10
+      }
+      onChange={() =>
+        setQuantidade(10)
+      }
+    />
+    {" "}
+    10
+  </label>
+
+  {"   "}
+
+  <label>
+    <input
+      type="radio"
+      checked={
+        quantidade === 20
+      }
+      onChange={() =>
+        setQuantidade(20)
+      }
+    />
+    {" "}
+    20
+  </label>
+
+  {"   "}
+
+  <label>
+    <input
+      type="radio"
+      checked={
+        quantidade === 50
+      }
+      onChange={() =>
+        setQuantidade(50)
+      }
+    />
+    {" "}
+    50
+  </label>
+
+  {"   "}
+
+  <label>
+    <input
+      type="radio"
+      checked={
+        quantidade === 100
+      }
+      onChange={() =>
+        setQuantidade(100)
+      }
+    />
+    {" "}
+    100
+  </label>
+
+</div>
 
           <div className="button-group">
 
