@@ -1,9 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 import {
-  useNavigate
-} from "react-router-dom";
+  obterResultado
+} from "../services/resultadoStore";
 
 export default function Resultado() {
-  
+
+  const resultado =
+    obterResultado();
+
+  const navigate =
+    useNavigate();
 
   return (
     <div className="page">
@@ -17,8 +24,23 @@ export default function Resultado() {
           </h1>
 
           <p>
-            Simulado finalizado com sucesso.
+            Questões respondidas:
+            {" "}
+            {
+              resultado.respondidas || 0
+            }
           </p>
+
+          <br />
+
+          <button
+            className="btn"
+            onClick={() =>
+              navigate("/")
+            }
+          >
+            🔄 Novo Simulado
+          </button>
 
         </div>
 

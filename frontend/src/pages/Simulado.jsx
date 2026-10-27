@@ -1,10 +1,13 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import {
   obterQuestoes
 } from "../services/simuladoStore";
+
+import {
+  salvarResultado
+} from "../services/resultadoStore";
 
 
 export default function Simulado() {
@@ -62,12 +65,32 @@ export default function Simulado() {
 
   } else {
 
-    navigate(
-  "/resultado"
-);
+  console.log(
+    "RESPOSTAS:",
+    respostas
+  );
 
-  }
+  console.log(
+    "QUANTIDADE:",
+    Object.keys(
+      respostas
+    ).length
+  );
 
+  salvarResultado({
+
+    respondidas:
+      Object.keys(
+        respostas
+      ).length
+
+  });
+
+  navigate(
+    "/resultado"
+  );
+
+}
 }
 
   return (
