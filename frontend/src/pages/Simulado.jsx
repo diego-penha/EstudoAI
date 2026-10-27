@@ -1,8 +1,11 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import {
   obterQuestoes
 } from "../services/simuladoStore";
+
 
 export default function Simulado() {
 
@@ -15,6 +18,9 @@ export default function Simulado() {
   const [respostas,
    setRespostas] =
     useState({});
+
+    const navigate =
+  useNavigate();
 
   if (
     questoes.length === 0
@@ -56,9 +62,9 @@ export default function Simulado() {
 
   } else {
 
-    alert(
-      "Simulado finalizado!"
-    );
+    navigate(
+  "/resultado"
+);
 
   }
 
